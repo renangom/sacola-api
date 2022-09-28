@@ -19,6 +19,8 @@ public class Restaurante {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String nome;
+
     @OneToMany(cascade = CascadeType.ALL) // ao excluir um restaurante, todos os produtos são excluidos
     private List<Produto> cardapio;
 
