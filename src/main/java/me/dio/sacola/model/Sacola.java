@@ -1,21 +1,21 @@
 package me.dio.sacola.model;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.*;
 import me.dio.sacola.enumeration.FormaPagamento;
 
+@AllArgsConstructor
+@Builder
+@Data
+@Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@NoArgsConstructor
 public class Sacola {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,18 +31,6 @@ public class Sacola {
     private double valorTotal;
 
     @Enumerated
-    private FormaPagamento formaPagamento;
+    private FormaPagamento FormaPagamento;
     private boolean fechada;
-
-    public Sacola() {
-
-    }
-
-    public Sacola(Long id, Cliente cliente, List<Item> itens, Double valorTotal, FormaPagamento formaPagamento, boolean fechada)) {
-        this.id = id;
-        this.cliente = cliente;
-        this.itens = itens;
-        this.valorTotal = valorTotal;
-        this.formaPagamento = formaPagamento;
-    }
 }

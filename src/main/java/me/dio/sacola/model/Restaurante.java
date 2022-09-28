@@ -2,19 +2,24 @@ package me.dio.sacola.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.*;
+
+@AllArgsConstructor
+@Builder
+@Data
+@Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@NoArgsConstructor
 public class Restaurante {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL) // ao excluir um restaurante, todos os produtos são excluidos
     private List<Produto> cardapio;
 
     @Embedded

@@ -1,14 +1,18 @@
 package me.dio.sacola.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.Builder;
+import lombok.*;
 
+@AllArgsConstructor
+@Builder
+@Data
+@Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@NoArgsConstructor
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,7 +25,7 @@ public class Produto {
     @Builder.Default
     private Boolean disponivel = true;
 
-    @ManyToMany
+    @ManyToOne
     @JsonIgnore
     private Restaurante restaurante;
 }
