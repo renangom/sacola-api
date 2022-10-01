@@ -6,11 +6,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import me.dio.sacola.model.Item;
 import me.dio.sacola.model.Sacola;
+import me.dio.sacola.resource.Dto.ItemDto;
 import me.dio.sacola.service.SacolaService;
 
 @RestController
@@ -30,7 +32,7 @@ public class SacolaResource {
     }
 
     @PatchMapping("/fecharSacola/{id}")
-    public Sacola fecharSacola(@PathVariable("id") Long id, int formaPagamento) {
+    public Sacola fecharSacola(@PathVariable("id") Long id, @RequestParam("formaPagamento") int formaPagamento) {
         return sacolaService.fecharSacola(id, formaPagamento);
     }
 }
